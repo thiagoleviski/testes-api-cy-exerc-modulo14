@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    bat 'npx serverest@latest'
 
     stages {
         stage('Clonar repositório') {
@@ -12,14 +13,6 @@ pipeline {
                 bat 'npm install'
             }
         }
-        stage ('Rodar servidor') {
-            steps{
-                bat 'npx serverest@latest'
-            }
-        }
-    }
-
-    stages{
         stage ('Executar testes'){
             steps{
                 bat 'npm run cy:run'
