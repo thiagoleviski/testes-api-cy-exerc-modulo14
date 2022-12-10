@@ -14,9 +14,12 @@ pipeline {
         }
         stage ('Rodar servidor') {
             steps{
-                bat 'npm run start'
+                bat 'npx serverest@latest'
             }
         }
+    }
+
+    stages{
         stage ('Executar testes'){
             steps{
                 bat 'npm run cy:run'
