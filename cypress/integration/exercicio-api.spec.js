@@ -51,7 +51,26 @@ describe('Testes da Funcionalidade Usuários', () => {
                url: 'usuarios',
                body: {
                     "nome": nome,
-                    "email": email,
+                    "email": "nome.qa.com.br",
+                    "password": "teste",
+                    "administrador": "true"
+
+               },
+               failOnStatusCode: false
+          }).then((response) => {
+               expect(response.status).to.equal(400)
+               expect(response.body.email).to.equal('email deve ser um email válido')
+               expect(response.duration).to.be.lessThan(20)
+          })
+     });
+     it('Deve validar um usuário com email repetido', () => {
+
+          cy.request({
+               method: 'POST',
+               url: 'usuarios',
+               body: {
+                    "nome": nome,
+                    "email": "fernando.tester@qa.com",
                     "password": "teste",
                     "administrador": "true"
 
@@ -63,14 +82,20 @@ describe('Testes da Funcionalidade Usuários', () => {
                expect(response.duration).to.be.lessThan(20)
           })
      });
-
      it('Deve editar um usuário previamente cadastrado', () => {
 
           cy.request({
-               method: 'GET',
-               url: 'usuarios'
+               method: 'POST',
+               url: 'usuarios',
+               body: {
+                    "nome": "Testador de PUT",
+                    "email": "put@tester.com",
+                    "password": "teste",
+                    "administrador": "true"
+
+               }
           }).then((response) => {
-               let id = response.body.usuarios[0]._id
+               let id = response.body._id
 
                cy.request({
                     method: 'PUT',
@@ -78,7 +103,7 @@ describe('Testes da Funcionalidade Usuários', () => {
                     body:
                     {
                          "nome": "Alterei meu nome",
-                         "email": nome+"@qa.com.br",
+                         "email": nome + "@qa.com.br",
                          "password": "teste",
                          "administrador": "true"
                     }
@@ -90,13 +115,27 @@ describe('Testes da Funcionalidade Usuários', () => {
           })
 
           it('Deve deletar um usuário previamente cadastrado', () => {
-               let id = response.body.usuarios[0]._id
+
                cy.request({
-                    method: 'DELETE',
-                    url: `usuarios/${id}`,
-               }).then(response => {
-                    expect(response.body.message).to.equal('Registro excluído com sucesso')
-                    expect(response.status).to.equal(200)
+                    method: 'POST',
+                    url: 'usuarios',
+                    body: {
+                         "nome": "Testador de DEL",
+                         "email": "del@tester.com",
+                         "password": "teste",
+                         "administrador": "true"
+
+                    }
+               }).then((response) => {
+                    let id = response.body._id
+
+                    cy.request({
+                         method: 'DELETE',
+                         url: `usuarios/${id}`,
+                    }).then(response => {
+                         expect(response.body.message).to.equal('Registro excluído com sucesso')
+                         expect(response.status).to.equal(200)
+                    })
                })
           })
      });
