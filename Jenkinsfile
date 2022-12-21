@@ -14,11 +14,13 @@ pipeline {
         }
         stage ('Rodar servidor') {
             steps{
+                bat 'start cmd.exe'
                 bat 'npx serverest@latest'
             }
         }
         stage ('Executar testes'){
             steps{
+                bat 'start cmd.exe'
                 bat 'npm run cy:run'
             }
         }
