@@ -21,6 +21,7 @@
     "mocha": "^9.1.0",
     "mochawesome": "^7.1.3",
     "mochawesome-merge": "^4.2.0",
-    "mochawesome-report-generator": "^6.2.0"
+    "mochawesome-report-generator": "^6.2.0",
+    "serverest": "^2.26.6"
   }
 }
