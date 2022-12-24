@@ -14,7 +14,7 @@ pipeline {
         }
         stage ('Rodar servidor'){
             steps{
-                bat 'npm i serverest'
+                bat 'npm i serverest -g'
             }
         }
         stage ('Executar testes'){
