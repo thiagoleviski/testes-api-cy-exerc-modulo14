@@ -12,11 +12,11 @@ pipeline {
                 bat 'npm install'
             }
         }
-        stage ('Rodar servidor'){
-            steps{
-                bat 'npm start'
-            }
-        }
+        // stage ('Rodar servidor'){
+        //     steps{
+        //         bat 'npm start'
+        //     }
+        // }
         stage ('Executar testes'){
             steps{
                 bat 'npm run cy:run'
