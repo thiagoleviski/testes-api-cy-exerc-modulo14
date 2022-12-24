@@ -20,7 +20,7 @@ describe('Testes da Funcionalidade Usuários', () => {
                expect(response.status).to.equal(200)
                expect(response.body).to.have.property('usuarios')
                expect(response.body).to.have.property('quantidade')
-               expect(response.duration).to.be.lessThan(17)
+               expect(response.duration).to.be.lessThan(200)
                expect(response.body.quantidade).to.be.not.equal(0)
           })
      });
@@ -60,7 +60,7 @@ describe('Testes da Funcionalidade Usuários', () => {
           }).then((response) => {
                expect(response.status).to.equal(400)
                expect(response.body.email).to.equal('email deve ser um email válido')
-               expect(response.duration).to.be.lessThan(20)
+               expect(response.duration).to.be.lessThan(200)
           })
      });
      it('Deve validar um usuário com email repetido', () => {
@@ -79,7 +79,7 @@ describe('Testes da Funcionalidade Usuários', () => {
           }).then((response) => {
                expect(response.status).to.equal(400)
                expect(response.body.message).to.equal('Este email já está sendo usado')
-               expect(response.duration).to.be.lessThan(20)
+               expect(response.duration).to.be.lessThan(200)
           })
      });
      it('Deve editar um usuário previamente cadastrado', () => {
@@ -109,7 +109,7 @@ describe('Testes da Funcionalidade Usuários', () => {
                     }
                }).then(response => {
                     expect(response.body.message).to.equal('Registro alterado com sucesso')
-                    expect(response.duration).to.be.lessThan(27)
+                    expect(response.duration).to.be.lessThan(270)
                     expect(response.status).to.equal(200)
                })
           })
