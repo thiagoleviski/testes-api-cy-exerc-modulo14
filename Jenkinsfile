@@ -16,7 +16,7 @@ pipeline {
             steps{
                 bat 'npm i serverest'
             }
-        
+        }
         stage ('Executar testes'){
             steps{
                 bat 'npm run cy:run'
